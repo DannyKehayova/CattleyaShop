@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+            {% block body %}
+                <h1>Product</h1>
+
+                <table>
+                    <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ product.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Name</th>
+                        <td>{{ product.name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Price</th>
+                        <td>{{ product.price }}</td>
+                    </tr>
+                    <tr>
+                        <th>Quantity</th>
+                        <td>{{ product.quantity }}</td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td>{{ product.description }}</td>
+                    </tr>
+                    <tr>
+                        <th>Photo</th>
+                        <td><img src="/images/products/{{ product.photo }}" style="width: 250px;" ></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <ul>
+                    <li>
+                        <a href="{{ path('products_index') }}">Back to the list</a>
+                    </li>
+                    {% if app.getUser.isAdmin() or app.getUser.isEditor()%}
+                    <li>
+                        <a href="{{ path('products_edit', { 'id': product.id }) }}">Edit</a>
+                    </li>
+                    <li>
+                        {{ form_start(delete_form) }}
+                        <input type="submit" value="Delete">
+                        {{ form_end(delete_form) }}
+                    </li>
+                    {% endif %}
+                </ul>
+            {% endblock %}
+
