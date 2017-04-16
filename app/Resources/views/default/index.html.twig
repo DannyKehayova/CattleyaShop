@@ -1,9 +1,33 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
+
+{% block main %}
+    {#<div class="container body-content">#}
+        {#<div class="row">#}
+            {#{% for category in categories %}#}
+                {#<div class="col-md-6">#}
+                    {#<article>#}
+                        {#<header>#}
+                            {#<h5>{{ category.name }}</h5>#}
+                        {#</header>#}
+
+                        {#<p>#}
+                            {#{{ category.products.count }}#}
+                        {#</p>#}
 
 
-    <a href="{{ url('products_index')}}">Products</a>
+
+                        {#<footer>#}
+                            {#<div class="pull-right">#}
+                                {#<a class="btn btn-default btn-xs"#}
+                                   {#href="{{ path('category_products', {'id': category.id}) }}">Read more &raquo;</a>#}
+                            {#</div>#}
+                        {#</footer>#}
+                    {#</article>#}
+                {#</div>#}
+            {#{% endfor %}#}
+        {#</div>#}
+    {#</div>#}
 {% endblock %}
 
 

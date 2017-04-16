@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+<div class="container body-content">
+    <div class="row">
+        {% for product in products %}
+            <div class="col-md-6">
+                <article>
+                    <header>
+                        <h2>{{ product.name }}</h2>
+                    </header>
+
+                    <p>
+                        {{ product.price }}
+                    </p>
+
+                    <small class="author">
+                        {{ product.description}}
+                    </small>
+
+                    <footer>
+                        <div class="pull-right">
+                            <a class="btn btn-default btn-xs"
+                               href="{{ path('products_show', {'id': product.id}) }}">Read more &raquo;</a>
+                        </div>
+                    </footer>
+                </article>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

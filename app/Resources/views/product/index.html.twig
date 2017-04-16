@@ -1,55 +1,55 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<table>
-    <thead>
-    <tr>
-
-        <th>Name</th>
-        <th>Price</th>
-        <th>Quantity</th>
-        <th>Description</th>
-        <th>Photo</th>
-        <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for product in products %}
+    <table>
+        <thead>
         <tr>
 
-            <td>{{ product.name }}</td>
-            <td>{{ product.price }}</td>
-            <td>{{ product.quantity }}</td>
-            <td>{{ product.description }}</td>
-            <td><img src="/images/products/{{ product.photo }}" style="width: 250px;" ></td>>
-            <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('products_show', { 'id': product.id }) }}">show</a>
-                    </li>
-                    {% if app.getUser.isAdmin() or app.getUser.isEditor()%}
-
-                        <li>
-                            <a href="{{ path('products_edit', { 'id': product.id }) }}">edit</a>
-                        </li>
-                    {% endif %}
-
-                </ul>
-            </td>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Description</th>
+            <th>Photo</th>
+            <th>Actions</th>
         </tr>
-    {% endfor %}
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
 
-<ul>
-    <li>
-        <a href="{{ path('products_new') }}">Create a new product</a>
-    </li>
-</ul>
-<ul class="pagination">
-    <li class="active"><a href="">1</a></li>
-    <li><a href="">2</a></li>
-    <li><a href="">3</a></li>
-    <li><a href="">&raquo;</a></li>
-</ul>
+                <td>{{ product.name }}</td>
+                <td>{{ product.price}}</td>
+                <td>{{ product.quantity }}</td>
+                <td>{{ product.description }}</td>
+                <td><img src="/images/products/{{ product.photo }}" style="width: 250px;" ></td>>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('products_show', { 'id': product.id }) }}">show</a>
+                        </li>
+                        {% if app.getUser.isAdmin() or app.getUser.isEditor()%}
+
+                            <li>
+                                <a href="{{ path('products_edit', { 'id': product.id }) }}">edit</a>
+                            </li>
+                        {% endif %}
+
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('products_new') }}">Create a new product</a>
+        </li>
+    </ul>
+    <ul class="pagination">
+        <li class="active"><a href="">1</a></li>
+        <li><a href="">2</a></li>
+        <li><a href="">3</a></li>
+        <li><a href="">&raquo;</a></li>
+    </ul>
 {% endblock %}
