@@ -1,3 +1,7 @@
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,7 +55,7 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="logo pull-left">
-                            <a href="{{ path('default_index') }}"><img src="{{ asset('images/home/logo1.png') }}" alt="" /></a>
+                            <a href="{{ path('default_index') }}"><img src="{{ asset ('images/home/logo1.png')}}" alt="" /></a>
                         </div>
 
                     </div>
@@ -77,7 +81,7 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="logo pull-left">
-                            <a href="{{ path('default_index') }}"><img src="{{ asset('images/home/girl1.jpg') }}" alt="" /></a>
+                            <a href="{{ path('default_index') }}"><img src="images/home/logo1.png" alt="" /></a>
                         </div>
 
                     </div>
@@ -199,7 +203,7 @@
                                 <button type="button" class="btn btn-default get">Shop here</button>
                             </div>
                             <div class="col-sm-6">
-                                <img src="{{ asset ('images/home/girl2.jpg')}}" class="girl img-responsive" alt="" />
+                                <img src="{{ asset('images/home/girl2.jpg') }}" class="girl img-responsive" alt="" />
                                 <img src="{{ asset('images/home/pricing.png') }}"  class="pricing" alt="" />
                             </div>
                         </div>
@@ -220,27 +224,55 @@
 </section><!--/slider-->
 
 
+
+
             {% block body %}
 
                 {% block main %}
-<div class="container body-content">
-    <div class="well">
-        <div class="row">
-                    <h1>Product edit</h1>
+                    <div class="container body-content">
+                        <div class="well">
+                            <h2>All Users</h2>
+                            <div class="row">
+                                <table class="table table-striped table-hover ">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Username</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Address</th>
+                                        <th>City</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for user in users %}
 
-                    {{ form_start(edit_form) }}
-                    {{ form_widget(edit_form) }}
-                    <input type="submit" value="Edit" />
-                    {{ form_end(edit_form) }}
-                    <a href="{{ path('products_index') }}">Back to the list</a>
-
-                    {{ form_start(delete_form) }}
-                    <input type="submit" value="Delete">
-                    {{ form_end(delete_form) }}
+                                        <tr>
+                                        <tr {% if user.isAdmin() %}class="info" {% endif %}>
+                                            <td>{{ user.id }}</td>
+                                            <td>{{ user.username}}</td>
+                                            <td>{{ user.email }}</td>
+                                            <td>{{ user.phone }}</td>
+                                            <td>{{ user.address }}</td>
+                                            <td>{{ user.city }}</td>
+                                            <td>
+                                                <a class="btn btn-primary btn-xs" href="{{ path('admin_user_edit', {'id': user.id}) }}">Edit</a>
+                                                <a class="btn btn-danger btn-xs" href="{{ path('admin_user_delete', {'id': user.id}) }}">Delete</a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 {% endblock %}
 
             {% endblock %}
+        </div>
+    </div>
 
+</section>
 {% endblock %}
 
 
@@ -261,7 +293,7 @@
                             <div class="video-gallery text-center">
                                 <a href="#">
                                     <div class="iframe-img">
-                                        <img src="{{ asset('images/ico/apple-touch-icon-57-precomposed.png') }}" alt="" />
+                                        <img src="{{ asset('images/home/iframe1.png') }}" alt="" />
                                     </div>
                                     <div class="overlay-icon">
                                         <i class="fa fa-play-circle-o"></i>
@@ -276,7 +308,7 @@
                             <div class="video-gallery text-center">
                                 <a href="#">
                                     <div class="iframe-img">
-                                        <img src="{{ asset('images/ico/apple-touch-icon-57-precomposed.png') }}" alt="" />
+                                        <img src="{{ asset('images/home/iframe2.png') }}" alt="" />
                                     </div>
                                     <div class="overlay-icon">
                                         <i class="fa fa-play-circle-o"></i>
@@ -291,7 +323,7 @@
                             <div class="video-gallery text-center">
                                 <a href="#">
                                     <div class="iframe-img">
-                                        <img src="{{ asset('images/ico/apple-touch-icon-57-precomposed.png') }}" alt="" />
+                                        <img src="{{ asset('images/home/iframe3.png') }}" alt="" />
                                     </div>
                                     <div class="overlay-icon">
                                         <i class="fa fa-play-circle-o"></i>
@@ -306,7 +338,7 @@
                             <div class="video-gallery text-center">
                                 <a href="#">
                                     <div class="iframe-img">
-                                        <img src="{{ asset('images/ico/apple-touch-icon-57-precomposed.png') }}" alt="" />
+                                        <img src="{{ asset('images/home/iframe4.png') }}" alt="" />
                                     </div>
                                     <div class="overlay-icon">
                                         <i class="fa fa-play-circle-o"></i>

@@ -1,32 +1,55 @@
 {% extends 'base.html.twig' %}
 
-{% block main %}
-<div class="container body-content">
-    <div class="row">
+{% block body %}
+    <table>
+        <thead>
+        <tr>
+
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Description</th>
+            <th>Photo</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
         {% for product in products %}
-            <div class="col-md-6">
-                <article>
-                    <header>
-                        <h2>{{ product.name }}</h2>
-                    </header>
+            <tr>
 
-                    <p>
-                        {{ product.price }}
-                    </p>
+                <td>{{ product.name }}</td>
+                <td>{{ product.price}}</td>
+                <td>{{ product.quantity }}</td>
+                <td>{{ product.description }}</td>
+                <td><img src="/images/products/{{ product.photo }}" style="width: 250px;" ></td>>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('products_show', { 'id': product.id }) }}">show</a>
+                        </li>
+                        {% if app.getUser.isAdmin() or app.getUser.isEditor()%}
 
-                    <small class="author">
-                        {{ product.description}}
-                    </small>
+                            <li>
+                                <a href="{{ path('products_edit', { 'id': product.id }) }}">edit</a>
+                            </li>
+                        {% endif %}
 
-                    <footer>
-                        <div class="pull-right">
-                            <a class="btn btn-default btn-xs"
-                               href="{{ path('products_show', {'id': product.id}) }}">Read more &raquo;</a>
-                        </div>
-                    </footer>
-                </article>
-            </div>
+                    </ul>
+                </td>
+            </tr>
         {% endfor %}
-    </div>
-</div>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('products_new') }}">Create a new product</a>
+        </li>
+    </ul>
+    <ul class="pagination">
+        <li class="active"><a href="">1</a></li>
+        <li><a href="">2</a></li>
+        <li><a href="">3</a></li>
+        <li><a href="">&raquo;</a></li>
+    </ul>
 {% endblock %}

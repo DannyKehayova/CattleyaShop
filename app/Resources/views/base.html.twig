@@ -15,14 +15,15 @@
     <link href="{{ asset ('css/responsive.css') }}" rel="stylesheet">
 
     <!--[if lt IE 9]>
+
     <script src="{{ asset ('js/html5shiv.js') }}"></script>
 
     <![endif]-->
-    <link rel="shortcut icon" href="images/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="{{ asset('images/ico/apple-touch-icon-57-precomposed.png') }}">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ asset('images/ico/apple-touch-icon-144-precomposed.png') }}">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ asset('images/ico/apple-touch-icon-144-precomposed.png') }}">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ asset('images/ico/apple-touch-icon-72-precomposed.png') }}">
+    <link rel="apple-touch-icon-precomposed" href="{{ asset('images/ico/apple-touch-icon-57-precomposed.png') }}">
 
     {% block stylesheets %}{% endblock %}
     {% block header %}
@@ -50,7 +51,7 @@
             <div class="row">
                 <div class="col-sm-4">
                     <div class="logo pull-left">
-                        <a href="index.html"><img src="images/home/logo1.png" alt="" /></a>
+                        <a href="{{ path('default_index') }}"><img src="{{ asset('images/home/logo1.png') }}" alt="" /></a>
                     </div>
 
                 </div>
@@ -76,7 +77,7 @@
             <div class="row">
                 <div class="col-sm-4">
                     <div class="logo pull-left">
-                        <a href="index.html"><img src="images/home/logo1.png" alt="" /></a>
+                        <a href="{{ path('default_index') }}"><img src="{{ asset('images/home/logo1.png') }}" alt="" /></a>
                     </div>
 
                 </div>
@@ -89,6 +90,8 @@
                             <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
                             <li><a href="{{ path('security_login') }}"><i class="fa fa-lock"></i> Login</a></li>
                             <li><a href="{{ path('user_register') }}"><i class="fa fa-lock"></i> Register</a></li>
+
+
                         </ul>
                     </div>
                 </div>
@@ -111,7 +114,17 @@
                     </div>
                     <div class="mainmenu pull-left">
                         <ul class="nav navbar-nav collapse navbar-collapse">
-                            <li><a href="{{ path('products_index') }}" class="active">Home</a></li>
+                            {% if app.user %}
+                            {% if app.user.isAdmin() %}
+                                <li class="dropdown"><a href="#">Admin<i class="fa fa-angle-down"></i></a>
+                                    <ul role="menu" class="sub-menu">
+                                        <li><a href="{{ path('admin_users') }}">Users</a></li>
+
+                                    </ul>
+                                </li>
+                            {% endif %}
+                            {% endif %}
+                            <li><a href="{{ path('default_index') }}" class="active">Home</a></li>
                             <li class="dropdown"><a href="#">Магазин<i class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu">
                                     <li><a href="{{ path('products_index') }}">Продукти</a></li>
@@ -162,8 +175,8 @@
                                 <button type="button" class="btn btn-default get">Shop here</button>
                             </div>
                             <div class="col-sm-6">
-                                <img src="images/home/girl1.jpg" class="girl img-responsive" alt="" />
-                                <img src="images/home/pricing.png"  class="pricing" alt="" />
+                                <img src="{{ asset('images/home/girl1.jpg') }}" class="girl img-responsive" alt="" />
+                                <img src="{{ asset('images/home/pricing.png') }}"  class="pricing" alt="" />
                             </div>
                         </div>
                         <div class="item">
@@ -174,8 +187,8 @@
                                 <button type="button" class="btn btn-default get">Shop here</button>
                             </div>
                             <div class="col-sm-6">
-                                <img src="images/home/girl2.jpg" class="girl img-responsive" alt="" />
-                                <img src="images/home/pricing.png"  class="pricing" alt="" />
+                                <img src="{{ asset('images/home/girl2.jpg') }}" class="girl img-responsive" alt="" />
+                                <img src="{{ asset('images/home/pricing.png') }}"  class="pricing" alt="" />
                             </div>
                         </div>
                         <div class="item">
@@ -186,8 +199,8 @@
                                 <button type="button" class="btn btn-default get">Shop here</button>
                             </div>
                             <div class="col-sm-6">
-                                <img src="images/home/girl2.jpg" class="girl img-responsive" alt="" />
-                                <img src="images/home/pricing.png"  class="pricing" alt="" />
+                                <img src="{{ asset('images/home/girl2.jpg') }}" class="girl img-responsive" alt="" />
+                                <img src="{{ asset('images/home/pricing.png') }}"  class="pricing" alt="" />
                             </div>
                         </div>
 
@@ -218,7 +231,7 @@
                                 <h4 class="panel-title">
                                     <a data-toggle="collapse" data-parent="#accordian" href="#sportswear">
                                         <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                                        <li><a href="#">Техника </a>
+                                        <a href="#">Техника </a>
                                     </a>
                                 </h4>
                             </div>
@@ -237,7 +250,7 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordian" href="#mens">
+                                    <a data-toggle="collapse" data-parent="#accordian" href="#womens">
                                         <span class="badge pull-right"><i class="fa fa-plus"></i></span>
                                         <a href="#">Здраве и красота </a>
                                     </a>
@@ -274,6 +287,7 @@
                                         <li><a href="{{ path('category_products', {'id': '17'}) }}">Обеци</a></li>
 
                                     </ul>
+
                                 </div>
                             </div>
                         </div>
@@ -328,7 +342,7 @@
                     </div><!--/price-range-->
 
                     <div class="shipping text-center"><!--shipping-->
-                        <img src="images/home/shipping.jpg" alt="" />
+                        <img src="{{ asset('images/home/shipping.jpg') }}" alt="" />
                     </div><!--/shipping-->
 
                 </div>
@@ -362,7 +376,7 @@
                         <div class="video-gallery text-center">
                             <a href="#">
                                 <div class="iframe-img">
-                                    <img src="images/home/iframe1.png" alt="" />
+                                    <img src="{{ asset('images/home/iframe1.png') }}" alt="" />
                                 </div>
                                 <div class="overlay-icon">
                                     <i class="fa fa-play-circle-o"></i>
@@ -377,7 +391,7 @@
                         <div class="video-gallery text-center">
                             <a href="#">
                                 <div class="iframe-img">
-                                    <img src="images/home/iframe2.png" alt="" />
+                                    <img src="{{ asset('images/home/iframe2.png') }}" alt="" />
                                 </div>
                                 <div class="overlay-icon">
                                     <i class="fa fa-play-circle-o"></i>
@@ -392,7 +406,7 @@
                         <div class="video-gallery text-center">
                             <a href="#">
                                 <div class="iframe-img">
-                                    <img src="images/home/iframe3.png" alt="" />
+                                    <img src="{{ asset('images/home/iframe3.png') }}" alt="" />
                                 </div>
                                 <div class="overlay-icon">
                                     <i class="fa fa-play-circle-o"></i>
@@ -407,7 +421,7 @@
                         <div class="video-gallery text-center">
                             <a href="#">
                                 <div class="iframe-img">
-                                    <img src="images/home/iframe4.png" alt="" />
+                                    <img src="{{ asset('images/home/iframe4.png') }}" alt="" />
                                 </div>
                                 <div class="overlay-icon">
                                     <i class="fa fa-play-circle-o"></i>
@@ -420,7 +434,7 @@
                 </div>
                 <div class="col-sm-3">
                     <div class="address">
-                        <img src="images/home/map.png" alt="" />
+                        <img src="{{ asset('images/home/map.png') }}" alt="" />
                         <p>гр.Добрич ул "Георги Кирков" 23</p>
                     </div>
                 </div>
@@ -494,12 +508,12 @@
 {% endblock %}
 
 {% block javascripts %}
-<script src="js/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.scrollUp.min.js"></script>
-<script src="js/price-range.js"></script>
-<script src="js/jquery.prettyPhoto.js"></script>
-<script src="js/main.js"></script>
+    <script src="{{ asset('js/jquery.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.scrollUp.min.js') }}"></script>
+    <script src="{{ asset('js/price-range.js') }}"></script>
+    <script src="{{ asset('js/jquery.prettyPhoto.js') }}"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
 {% endblock %}
 </body>
 </html>

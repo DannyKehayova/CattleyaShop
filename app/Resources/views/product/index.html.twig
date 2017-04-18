@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <table>
+{% block main %}
+   <section> <table>
         <thead>
         <tr>
 
@@ -27,13 +27,14 @@
                         <li>
                             <a href="{{ path('products_show', { 'id': product.id }) }}">show</a>
                         </li>
+                        {% if app.user %}
                         {% if app.getUser.isAdmin() or app.getUser.isEditor()%}
 
                             <li>
                                 <a href="{{ path('products_edit', { 'id': product.id }) }}">edit</a>
                             </li>
                         {% endif %}
-
+                        {% endif %}
                     </ul>
                 </td>
             </tr>
@@ -52,4 +53,5 @@
         <li><a href="">3</a></li>
         <li><a href="">&raquo;</a></li>
     </ul>
+   </section>
 {% endblock %}
