@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block body_id 'profile' %}
+
+{% block main %}
+    <div>
+        {{ user.email }}
+        <br>
+        {{ user.username }}
+        <br>Roles:
+        {% for role in user.roles %}
+            {{ role }}<span>   </span>
+        {% endfor %}
+    </div>
+{% endblock %}

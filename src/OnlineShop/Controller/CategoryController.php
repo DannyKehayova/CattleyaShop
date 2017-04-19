@@ -46,7 +46,7 @@ class CategoryController extends Controller
             return $this->redirectToRoute('products_index');
         }
 
-        return $this->render('/category/create.html.twig', array('form' => $form->createView()));
+        return $this->render('admin/category/create.html.twig', array('form' => $form->createView()));
     }
 
     /**

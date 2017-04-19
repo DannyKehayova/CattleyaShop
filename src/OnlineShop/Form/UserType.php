@@ -39,6 +39,8 @@ class UserType extends AbstractType
                           'label' => 'Repeat Password'
                       ]
                 ])
+            ->add('firstName',TextType::class)
+            ->add('secondName',TextType::class)
             ->add('phone')
             ->add('address',TextType::class)
             ->add('city',TextType::class)

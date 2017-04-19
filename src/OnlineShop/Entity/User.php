@@ -75,6 +75,52 @@ class User implements UserInterface
      */
     private $address;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="first_name", type="string", length=255, nullable=true)
+     */
+    private $firstName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="second_name", type="string", length=255, nullable=true)
+     */
+    private $secondName;
+
+    /**
+     * @return string
+     */
+    public function getFirstName(): string
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * @param string $firstName
+     */
+    public function setFirstName(string $firstName)
+    {
+        $this->firstName = $firstName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSecondName(): string
+    {
+        return $this->secondName;
+    }
+
+    /**
+     * @param string $secondName
+     */
+    public function setSecondName(string $secondName)
+    {
+        $this->secondName = $secondName;
+    }
+
 //    /**
 //     * @var string
 //     *

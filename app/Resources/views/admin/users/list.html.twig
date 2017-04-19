@@ -88,7 +88,7 @@
                     <div class="col-sm-8">
                         <div class="shop-menu pull-right">
                             <ul class="nav navbar-nav">
-                                <li><a href="#"><i class="fa fa-user"></i> Account</a></li>
+                                <li><a href="{{ path('user_profile')}}"><i class="fa fa-user"></i> Account</a></li>
                                 <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
                                 <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
                                 <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
@@ -119,10 +119,16 @@
                     <div class="mainmenu pull-left">
                         <ul class="nav navbar-nav collapse navbar-collapse">
                             {% if app.user %}
-                                {% if app.user.isAdmin() %}
+                                {% if app.user.isAdmin() or app.user.isEditor() %}
                                     <li class="dropdown"><a href="#">Admin<i class="fa fa-angle-down"></i></a>
                                         <ul role="menu" class="sub-menu">
-                                            <li><a href="{{ path('admin_users') }}">Users</a></li>
+                                            {% if app.user.isAdmin() %}
+                                                <li><a href="{{ path('admin_users') }}">Users</a></li>
+                                            {% endif %}
+                                            <li><a href="{{ path('categories_create') }}">create Category</a></li>
+                                            <li><a href="{{ path('admin_categories') }}">Category list</a></li>
+                                            <li><a href="{{ path('products_new') }}">Create product</a></li>
+
 
                                         </ul>
                                     </li>
@@ -242,6 +248,8 @@
                                         <th>Phone</th>
                                         <th>Address</th>
                                         <th>City</th>
+                                        <th>First name</th>
+                                        <th>Second name</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -255,6 +263,8 @@
                                             <td>{{ user.phone }}</td>
                                             <td>{{ user.address }}</td>
                                             <td>{{ user.city }}</td>
+                                            <td>{{ user.firstName }}</td>
+                                            <td>{{ user.secondName }}</td>
                                             <td>
                                                 <a class="btn btn-primary btn-xs" href="{{ path('admin_user_edit', {'id': user.id}) }}">Edit</a>
                                                 <a class="btn btn-danger btn-xs" href="{{ path('admin_user_delete', {'id': user.id}) }}">Delete</a>
