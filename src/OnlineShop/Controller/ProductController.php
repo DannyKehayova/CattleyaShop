@@ -3,6 +3,8 @@
 namespace OnlineShop\Controller;
 
 use OnlineShop\Entity\Product;
+use OnlineShop\OnlineShop;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -11,6 +13,7 @@ use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 
+
 /**
  * Product controller.
  *
@@ -18,22 +21,22 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class ProductController extends Controller
 {
-    /**
-     * Lists all product entities.
-     *
-     * @Route("/", name="products_index")
-     * @Method("GET")
-     */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $products = $em->getRepository('OnlineShop:Product')->findAll();
-
-        return $this->render('product/index.html.twig', array(
-            'products' => $products,
-        ));
-    }
+//    /**
+//     * Lists all product entities.
+//     *
+//     * @Route("/", name="products_index")
+//     * @Method("GET")
+//     */
+//    public function indexAction()
+//    {
+//        $em = $this->getDoctrine()->getManager();
+//
+//        $products = $em->getRepository('OnlineShop:Product')->findAll();
+//
+//        return $this->render('product/index.html.twig', array(
+//            'products' => $products,
+//        ));
+//    }
 
     /**
      * Creates a new product entity.
@@ -179,5 +182,31 @@ class ProductController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+    /**
+     * @Route("/",name="list")
+     * @Method("GET")
+     *
+     */
+    public function KnpPagination(Request $request)
+    {
+        $blogProducts=$this->getDoctrine()->getRepository('OnlineShop:Product')->findAll();
+
+        /**
+         * @var $paginator \Knp\Component\Pager\Paginator
+         *
+         */
+
+        $paginator=$this->get('knp_paginator');
+        $result=$paginator->paginate(
+            $blogProducts,
+            $request->query->getInt('page',1),
+            $request->query->getInt('limit',5)
+        );
+
+        return $this->render('product/pagination.html.twig',['blog_products'=>$result,
+            ]);
+
     }
 }

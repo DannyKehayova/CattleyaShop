@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+
+
+    {% block body %}
+        <table>
+            <thead>
+            <tr>
+
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Description</th>
+                <th>Photo</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for product in blog_products %}
+                <tr>
+
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.price}}</td>
+                    <td>{{ product.quantity }}</td>
+                    <td>{{ product.description }}</td>
+                    <td><img src="/images/products/{{ product.photo }}" style="width: 250px;" ></td>>
+                    <td>
+                        <ul>
+                            <li>
+                                <a href="{{ path('products_show', { 'id': product.id }) }}">show</a>
+                            </li>
+                            {% if app.getUser.isAdmin() or app.getUser.isEditor()%}
+
+                                <li>
+                                    <a href="{{ path('products_edit', { 'id': product.id }) }}">edit</a>
+                                </li>
+                            {% endif %}
+
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+<div class="navigation text-center">
+    {{ knp_pagination_render(blog_products) }}
+</div>
+{% endblock %}
+
+
+
+
