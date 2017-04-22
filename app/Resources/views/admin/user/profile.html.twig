@@ -6,9 +6,25 @@
 
 {% block main %}
     <div>
+        <p> Email:</p>
         {{ user.email }}
         <br>
+        <p></p>
+        <p> Username:</p>
         {{ user.username }}
+        <br>
+        <p></p>
+        <p> Phone:</p>
+        {{ user.phone }}
+        <br>
+        <p></p>
+        <p> City:</p>
+        {{ user.city }}
+        <br>
+        <p></p>
+        <p> Adress:</p>
+        {{ user.address }}
+        <p></p>
         <br>Roles:
         {% for role in user.roles %}
             {{ role }}<span>   </span>

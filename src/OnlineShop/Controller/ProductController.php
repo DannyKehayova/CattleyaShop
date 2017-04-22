@@ -109,7 +109,7 @@ class ProductController extends Controller
         $currentUser=$this->getUser();
         if(!$currentUser->isAdmin()&&!$currentUser->isEditor())
         {
-            return $this->redirectToRoute('products_index');
+            return $this->redirectToRoute('list');
         }
         $deleteForm = $this->createDeleteForm($product);
         $editForm = $this->createForm('OnlineShop\Form\ProductType', $product);
@@ -133,7 +133,7 @@ class ProductController extends Controller
             }
             $this->getDoctrine()->getManager()->flush();
             $this->get('session')->getFlashBag()->add('success','Product updated');
-            return $this->redirectToRoute('products_index');
+            return $this->redirectToRoute('list');
         }
 
         return $this->render('product/edit.html.twig', array(
@@ -154,7 +154,7 @@ class ProductController extends Controller
         $currentUser=$this->getUser();
         if(!$currentUser->isAdmin()&&!$currentUser->isEditor())
         {
-            return $this->redirectToRoute('products_index');
+            return $this->redirectToRoute('list');
         }
         $form = $this->createDeleteForm($product);
         $form->handleRequest($request);
@@ -165,7 +165,7 @@ class ProductController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('products_index');
+        return $this->redirectToRoute('list');
     }
 
     /**

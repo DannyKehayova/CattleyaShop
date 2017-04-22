@@ -43,7 +43,7 @@ class CategoryController extends Controller
             $em->persist($category);
             $em->flush();
 
-            return $this->redirectToRoute('products_index');
+            return $this->redirectToRoute('list');
         }
 
         return $this->render('admin/category/create.html.twig', array('form' => $form->createView()));

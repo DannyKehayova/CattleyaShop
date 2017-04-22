@@ -33,7 +33,7 @@
 
                 <ul>
                     <li>
-                        <a href="{{ path('products_index') }}">Back to the list</a>
+                        <a href="{{ path('list') }}">Back to the list</a>
                     </li>
                     {% if app.user %}
                     {% if app.getUser.isAdmin() or app.getUser.isEditor()%}

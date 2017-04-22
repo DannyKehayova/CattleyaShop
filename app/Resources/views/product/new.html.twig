@@ -58,7 +58,7 @@
                     <div class="col-sm-8">
                         <div class="shop-menu pull-right">
                             <ul class="nav navbar-nav">
-                                <li><a href="#"><i class="fa fa-user"></i> Акаунт </a></li>
+                                <li><a href="{{ path('user_profile') }}"><i class="fa fa-user"></i> Акаунт </a></li>
                                 <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
                                 <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
                                 <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
@@ -133,7 +133,7 @@
                             <li><a href="{{ path('default_index') }}" class="active">Home</a></li>
                             <li class="dropdown"><a href="#">Магазин<i class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu">
-                                    <li><a href="{{ path('products_index') }}">Продукти</a></li>
+                                    <li><a href="{{ path('list') }}">Продукти</a></li>
                                     <li><a href="product-details.html">Детайли</a></li>
                                     <li><a href="checkout.html">Checkout</a></li>
                                     <li><a href="cart.html">Cart</a></li>
@@ -246,7 +246,7 @@
 </section><!--/reg-->
 <ul>
     <li>
-        <a href="{{ path('products_index') }}">Back to the list</a>
+        <a href="{{ path('list') }}">Back to the list</a>
     </li>
 </ul>
 {% endblock %}
