@@ -87,7 +87,7 @@
                             <li><a href="{{ path('user_profile')}}"><i class="fa fa-user"></i> Account</a></li>
                             <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
                             <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                            <li><a href="{{ path('cart_view') }}"><i class="fa fa-shopping-cart"></i> Cart</a></li>
                             <li><a href="{{ path('security_login') }}"><i class="fa fa-lock"></i> Login</a></li>
                             <li><a href="{{ path('user_register') }}"><i class="fa fa-lock"></i> Register</a></li>
 
@@ -136,7 +136,7 @@
                                     <li><a href="{{ path('list') }}">Продукти</a></li>
                                     <li><a href="product-details.html">Детайли</a></li>
                                     <li><a href="checkout.html">Checkout</a></li>
-                                    <li><a href="cart.html">Cart</a></li>
+                                    <li><a href="{{ path('cart_view') }}">Cart</a></li>
 
                                 </ul>
                             </li>
@@ -147,7 +147,7 @@
                                 </ul>
                             </li>
                             <li><a href="404.html">Най-купувани</a></li>
-                            <li><a href="contact-us.html">Contact</a></li>
+                            <li><a href="{{ path('contactus') }}">Contact us</a></li>
                         </ul>
                     </div>
                 </div>
@@ -178,7 +178,9 @@
                                 <h1>Cattleya Shop</h1>
                                 <h2>Cool things</h2>
                                 <p>:)</p>
+                                <a href="{{ path('list') }}">
                                 <button type="button" class="btn btn-default get">Shop here</button>
+                                </a>
                             </div>
                             <div class="col-sm-6">
                                 <img src="{{ asset('images/home/girl1.jpg') }}" class="girl img-responsive" alt="" />
@@ -190,7 +192,9 @@
                                 <h1>Cattleya Shop</h1>
                                 <h2>Cool things</h2>
                                 <p>:) </p>
-                                <button type="button" class="btn btn-default get">Shop here</button>
+                                <a href="{{ path('list') }}">
+                                    <button type="button" class="btn btn-default get">Shop here</button>
+                                </a>
                             </div>
                             <div class="col-sm-6">
                                 <img src="{{ asset('images/home/girl2.jpg') }}" class="girl img-responsive" alt="" />
@@ -202,7 +206,9 @@
                                 <h1>Cattleya Shop</h1>
                                 <h2>Cool things</h2>
                                 <p>:) </p>
-                                <button type="button" class="btn btn-default get">Shop here</button>
+                                <a href="{{ path('list') }}">
+                                    <button type="button" class="btn btn-default get">Shop here</button>
+                                </a>
                             </div>
                             <div class="col-sm-6">
                                 <img src="{{ asset('images/home/girl2.jpg') }}" class="girl img-responsive" alt="" />
@@ -355,28 +361,7 @@
                         </div>
                     </div><!--/category-products-->
 
-                    <div class="brands_products"><!--brands_products-->
-                        <h2>Brands</h2>
-                        <div class="brands-name">
-                            <ul class="nav nav-pills nav-stacked">
-                                <li><a href="#"> <span class="pull-right">(50)</span>Acne</a></li>
-                                <li><a href="#"> <span class="pull-right">(56)</span>Grüne Erde</a></li>
-                                <li><a href="#"> <span class="pull-right">(27)</span>Albiro</a></li>
-                                <li><a href="#"> <span class="pull-right">(32)</span>Ronhill</a></li>
-                                <li><a href="#"> <span class="pull-right">(5)</span>Oddmolly</a></li>
-                                <li><a href="#"> <span class="pull-right">(9)</span>Boudestijn</a></li>
-                                <li><a href="#"> <span class="pull-right">(4)</span>Rösch creative culture</a></li>
-                            </ul>
-                        </div>
-                    </div><!--/brands_products-->
 
-                    <div class="price-range"><!--price-range-->
-                        <h2>Price Range</h2>
-                        <div class="well text-center">
-                            <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="600" data-slider-step="5" data-slider-value="[250,450]" id="sl2" ><br />
-                            <b class="pull-left">$ 0</b> <b class="pull-right">$ 600</b>
-                        </div>
-                    </div><!--/price-range-->
 
                     <div class="shipping text-center"><!--shipping-->
                         <img src="{{ asset('images/home/shipping.jpg') }}" alt="" />
@@ -487,10 +472,10 @@
                         <h2>Service</h2>
                         <ul class="nav nav-pills nav-stacked">
                             <li><a href="#">Online Help</a></li>
-                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="{{ path('contactus') }}">Contact Us</a></li>
                             <li><a href="#">Order Status</a></li>
                             <li><a href="#">Change Location</a></li>
-                            <li><a href="#">FAQ’s</a></li>
+                            <li><a href="{{ path('faq') }}">FAQ’s</a></li>
                         </ul>
                     </div>
                 </div>

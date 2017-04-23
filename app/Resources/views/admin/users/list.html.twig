@@ -62,10 +62,10 @@
                     <div class="col-sm-8">
                         <div class="shop-menu pull-right">
                             <ul class="nav navbar-nav">
-                                <li><a href="#"><i class="fa fa-user"></i> Акаунт </a></li>
+                                <li><a href="{{ path('user_profile') }}"><i class="fa fa-user"></i> Акаунт </a></li>
                                 <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
                                 <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                                <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                                <li><a href="{{ path('cart_view') }}"><i class="fa fa-shopping-cart"></i> Cart</a></li>
                                 <li><a href="{{ path('security_logout') }}"><i class="fa fa-lock"></i> Logout</a></li>
 
                             </ul>
@@ -182,7 +182,9 @@
                                 <h1>Cattleya Shop</h1>
                                 <h2>Cool things</h2>
                                 <p>:)</p>
-                                <button type="button" class="btn btn-default get">Shop here</button>
+                                <a href="{{ path('list') }}">
+                                    <button type="button" class="btn btn-default get">Shop here</button>
+                                </a>
                             </div>
                             <div class="col-sm-6">
                                 <img src="{{ asset('images/home/girl1.jpg') }}" class="girl img-responsive" alt="" />
@@ -194,7 +196,9 @@
                                 <h1>Cattleya Shop</h1>
                                 <h2>Cool things</h2>
                                 <p>:) </p>
-                                <button type="button" class="btn btn-default get">Shop here</button>
+                                <a href="{{ path('list') }}">
+                                    <button type="button" class="btn btn-default get">Shop here</button>
+                                </a>
                             </div>
                             <div class="col-sm-6">
                                 <img src="{{ asset('images/home/girl2.jpg') }}" class="girl img-responsive" alt="" />
@@ -206,7 +210,9 @@
                                 <h1>Cattleya Shop</h1>
                                 <h2>Cool things</h2>
                                 <p>:) </p>
-                                <button type="button" class="btn btn-default get">Shop here</button>
+                                <a href="{{ path('list') }}">
+                                    <button type="button" class="btn btn-default get">Shop here</button>
+                                </a>
                             </div>
                             <div class="col-sm-6">
                                 <img src="{{ asset('images/home/girl2.jpg') }}" class="girl img-responsive" alt="" />
@@ -377,10 +383,10 @@
                             <h2>Service</h2>
                             <ul class="nav nav-pills nav-stacked">
                                 <li><a href="#">Online Help</a></li>
-                                <li><a href="#">Contact Us</a></li>
+                                <li><a href="{{ path('contactus') }}">Contact Us</a></li>
                                 <li><a href="#">Order Status</a></li>
                                 <li><a href="#">Change Location</a></li>
-                                <li><a href="#">FAQ’s</a></li>
+                                <li><a href="{{ path('faq') }}">FAQ’s</a></li>
                             </ul>
                         </div>
                     </div>

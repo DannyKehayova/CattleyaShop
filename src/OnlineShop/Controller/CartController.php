@@ -71,9 +71,10 @@ class CartController extends Controller
             $em->flush();
             $cartItem = $em->getRepository('OnlineShop:CartItem')->findOneBy(['cart' => $cart, 'product' => $product]);
             $this->persistCartItem($now, $cart, $product, $em, $cartItem);
+
             $em->flush();
             $this->addFlash('success', sprintf('%s successfully added to cart', $product->getName()));
-            return $this->redirectToRoute('list');
+            return $this->redirectToRoute('cart_view');
         } else {
             $this->addFlash('warning', 'Only logged in users can add to cart.');
             return $this->redirectToRoute('security_login');
@@ -85,7 +86,7 @@ class CartController extends Controller
      * Updates shopping cart.
      *
      * @param Request $request
-     * @Route("/updatecart", name="update_cart"))
+     * @Route("/updatecart", name="update_cart")
      *
      * @return RedirectResponse
      */
@@ -93,18 +94,23 @@ class CartController extends Controller
     {
         $items = $request->get('item');
         $em = $this->getDoctrine()->getManager();
+
         foreach ($items as $id => $quantity) {
             $cartItem = $em->getRepository('OnlineShop:CartItem')->find($id);
+
             if (intval($quantity) > 0) {
                 $cartItem->setQuantity($quantity);
+
+
                 $em->persist($cartItem);
+
             } else {
                 $em->remove($cartItem);
             }
         }
         $em->flush();
         $this->addFlash('success', 'Cart updated.');
-        return $this->redirectToRoute('list');
+        return $this->redirectToRoute('cart_view');
     }
 
     /**
@@ -147,6 +153,7 @@ class CartController extends Controller
             $cartItem->setCart($cart);
             $cartItem->setProduct($product);
             $cartItem->setQuantity(1);
+
             $cartItem->setItemPrice($product->getPrice());
             $cartItem->setCreatedAt($now);
             $cartItem->setModifiedAt($now);
@@ -155,6 +162,7 @@ class CartController extends Controller
             $cartItem->setModifiedAt($now);
         }
         $em->persist($cartItem);
+        $product->setQuantity($product->getQuantity()-1);
     }
 
 

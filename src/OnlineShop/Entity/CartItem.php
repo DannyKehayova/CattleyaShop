@@ -64,7 +64,7 @@ class CartItem
     /**
      * @return Product
      */
-    public function getProduct(): \OnlineShop\Entity\Product
+    public function getProduct()
     {
         return $this->product;
     }
@@ -72,7 +72,7 @@ class CartItem
     /**
      * @param Product $product
      */
-    public function setProduct(\OnlineShop\Entity\Product $product)
+    public function setProduct(Product $product=null)
     {
         $this->product = $product;
     }

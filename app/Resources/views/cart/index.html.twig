@@ -21,24 +21,24 @@
                         <tr>
                             <td>{{ item.product.name }}</td>
                             <td>${{ item.itemPrice }}</td>
-                            <td>
-                                <label>
-                                    <input class="form-control" name="item[{{ item.id }}]" value="{{ item.quantity }}"/>
-                                </label>
-                            </td>
+                            <td>{{ item.quantity }}</td>
+
                             <td>${{ item.quantity * item.itemPrice }}</td>
+                            {#<td>#}
+                                {#<a href="{{ path('update_cart', { 'id': item.product.id }) }}">Update</a>#}
+                            {#</td>#}
                         </tr>
                     {% endfor %}
                     </tbody>
                 </table>
-                <button type="submit" class="btn btn-primary">Update Quantity</button>
+
             </form>
         </div>
-        {#<div class="col-md-4">#}
-            {#<p>Order Total: ${{ total }}</p>#}
+        <div class="col-md-4">
+            <p>Order Total: ${{ total }}</p>
             {#<a class="btn btn-sm btn-success" href="{{ path('web_shop_sales_checkout') }}">#}
                 {#<i class="fa fa-truck" aria-hidden="true"></i> Go to Checkout#}
             {#</a>#}
-        {#</div>#}
-    {#</div>#}
+        </div>
+    </div>
 {% endblock %}

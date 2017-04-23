@@ -177,7 +177,9 @@
                                 <h1>Cattleya Shop</h1>
                                 <h2>Cool things</h2>
                                 <p>:)</p>
-                                <button type="button" class="btn btn-default get">Shop here</button>
+                                <a href="{{ path('list') }}">
+                                    <button type="button" class="btn btn-default get">Shop here</button>
+                                </a>
                             </div>
                             <div class="col-sm-6">
                                 <img src="{{ asset('images/home/girl1.jpg') }}" class="girl img-responsive" alt="" />
@@ -189,7 +191,9 @@
                                 <h1>Cattleya Shop</h1>
                                 <h2>Cool things</h2>
                                 <p>:) </p>
-                                <button type="button" class="btn btn-default get">Shop here</button>
+                                <a href="{{ path('list') }}">
+                                    <button type="button" class="btn btn-default get">Shop here</button>
+                                </a>
                             </div>
                             <div class="col-sm-6">
                                 <img src="{{ asset('images/home/girl2.jpg') }}" class="girl img-responsive" alt="" />
@@ -201,7 +205,9 @@
                                 <h1>Cattleya Shop</h1>
                                 <h2>Cool things</h2>
                                 <p>:) </p>
-                                <button type="button" class="btn btn-default get">Shop here</button>
+                                <a href="{{ path('list') }}">
+                                    <button type="button" class="btn btn-default get">Shop here</button>
+                                </a>
                             </div>
                             <div class="col-sm-6">
                                 <img src="{{ asset('images/home/girl2.jpg') }}" class="girl img-responsive" alt="" />
@@ -347,10 +353,10 @@
                         <h2>Service</h2>
                         <ul class="nav nav-pills nav-stacked">
                             <li><a href="#">Online Help</a></li>
-                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="{{ path('contactus') }}">Contact Us</a></li>
                             <li><a href="#">Order Status</a></li>
                             <li><a href="#">Change Location</a></li>
-                            <li><a href="#">FAQ’s</a></li>
+                            <li><a href="{{ path('faq') }}">FAQ’s</a></li>
                         </ul>
                     </div>
                 </div>

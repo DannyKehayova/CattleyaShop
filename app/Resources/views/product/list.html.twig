@@ -24,25 +24,39 @@
                 <td><img src="/images/products/{{ product.photo }}" style="width: 250px;" ></td>>
                 <td>
                     <ul>
-                        <li>
-                            <a href="{{ path('products_show', { 'id': product.id }) }}">show</a>
-                        </li>
-                        {% if product.quantity > 0 %}
 
-                        <a class="btn btn-sm btn-success" href="{{ path ('add_to_cart',{ 'id': product.id }) }}">
+
+                        {% if product.quantity > 0 %}
+                            <li>
+
+                                <a class="btn btn-sm" href="{{ path('products_show', { 'id': product.id }) }}">
+                                    <button type="button" class="btn btn-fefault cart">
+                                        Show
+                                    </button>
+                                </a>
+
+                            </li>
+                        <a class="btn btn-sm" href="{{ path ('add_to_cart',{ 'id': product.id }) }}">
                             <button type="button" class="btn btn-fefault cart">
                                 <i class="fa fa-shopping-cart"></i>
                                 Add to cart
                             </button>
-                            {#</a>#}
+                            </a>
                         {% else %}
-                            <h4>OUT OF STOCK</h4>
+                            <h4>Няма наличност</h4>
                         {% endif %}
+                        {% if app.user %}
                         {% if app.getUser.isAdmin() or app.getUser.isEditor()%}
 
                             <li>
-                                <a href="{{ path('products_edit', { 'id': product.id }) }}">edit</a>
+                                <a class="btn btn-sm" href="{{ path('products_edit', { 'id': product.id }) }}">
+                                    <button type="button" class="btn btn-fefault cart">
+                                        Edit
+                                    </button>
+                                </a>
+
                             </li>
+                        {% endif %}
                         {% endif %}
 
                     </ul>

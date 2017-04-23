@@ -46,4 +46,22 @@ class DefaultController extends Controller
         return $this->render("admin/user/profile.html.twig", ['user'=>$user]);
 
     }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/contactus",name="contactus")
+     */
+    public function contactPage()
+    {
+        return $this->render('default/contactus.html.twig');
+    }
+
+    /**
+     * @Route("/faq",name="faq")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function FAQ()
+    {
+        return $this->render('default/faq.html.twig');
+    }
 }

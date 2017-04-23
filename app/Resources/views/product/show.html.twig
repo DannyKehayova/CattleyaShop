@@ -33,27 +33,42 @@
 
                 <ul>
                     <li>
-                        <a href="{{ path('list') }}">Back to the list</a>
+                        <a class="btn btn-sm" href="{{ path('list') }}">
+                            <button type="button" class="btn btn-fefault cart">
+                               Back to product catalog
+                            </button>
+                        </a>
+
                     </li>
+
                     {% if product.quantity > 0 %}
-                        {#<a class="btn btn-sm btn-success" href="{{ addToCartUrl.get(product.id) }}">#}
-                        <button type="button" class="btn btn-fefault cart">
-                            <i class="fa fa-shopping-cart"></i>
-                            Add to cart
-                        </button>
-                        {#</a>#}
+
+                        <a class="btn btn-sm" href="{{ path ('add_to_cart',{ 'id': product.id }) }}">
+
+                            <button type="button" class="btn btn-fefault cart">
+                                <i class="fa fa-shopping-cart"></i>
+                                Add to cart
+                            </button>
+                        </a>
                     {% else %}
-                        <h4>OUT OF STOCK</h4>
+                        <h4>Няма наличност</h4>
                     {% endif %}
                     {% if app.user %}
                     {% if app.getUser.isAdmin() or app.getUser.isEditor()%}
-                    <li>
-                        <a href="{{ path('products_edit', { 'id': product.id }) }}">Edit</a>
-                    </li>
+                        <li>
+                            <a class="btn btn-danger" href="{{ path('products_edit', { 'id': product.id }) }}">
+                                <button type="button">
+                                    Edit
+                                </button>
+                            </a>
+
+                        </li>
                     <li>
                         {{ form_start(delete_form) }}
+                        <a class="btn btn-danger">
                         <input type="submit" value="Delete">
                         {{ form_end(delete_form) }}
+                        </a>
                     </li>
                     {% endif %}
                     {% endif %}
