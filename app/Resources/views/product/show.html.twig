@@ -35,6 +35,16 @@
                     <li>
                         <a href="{{ path('list') }}">Back to the list</a>
                     </li>
+                    {% if product.quantity > 0 %}
+                        {#<a class="btn btn-sm btn-success" href="{{ addToCartUrl.get(product.id) }}">#}
+                        <button type="button" class="btn btn-fefault cart">
+                            <i class="fa fa-shopping-cart"></i>
+                            Add to cart
+                        </button>
+                        {#</a>#}
+                    {% else %}
+                        <h4>OUT OF STOCK</h4>
+                    {% endif %}
                     {% if app.user %}
                     {% if app.getUser.isAdmin() or app.getUser.isEditor()%}
                     <li>

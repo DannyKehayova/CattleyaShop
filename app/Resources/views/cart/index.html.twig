@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Shopping Cart{% endblock %}
+
+{% block body %}
+    <h1>Shopping Cart</h1>
+    <div class="row">
+        <div class="col-md-8">
+            <form action="{{ path('update_cart') }}" method="post">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Subtotal</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in items %}
+                        <tr>
+                            <td>{{ item.product.name }}</td>
+                            <td>${{ item.itemPrice }}</td>
+                            <td>
+                                <label>
+                                    <input class="form-control" name="item[{{ item.id }}]" value="{{ item.quantity }}"/>
+                                </label>
+                            </td>
+                            <td>${{ item.quantity * item.itemPrice }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <button type="submit" class="btn btn-primary">Update Quantity</button>
+            </form>
+        </div>
+        {#<div class="col-md-4">#}
+            {#<p>Order Total: ${{ total }}</p>#}
+            {#<a class="btn btn-sm btn-success" href="{{ path('web_shop_sales_checkout') }}">#}
+                {#<i class="fa fa-truck" aria-hidden="true"></i> Go to Checkout#}
+            {#</a>#}
+        {#</div>#}
+    {#</div>#}
+{% endblock %}

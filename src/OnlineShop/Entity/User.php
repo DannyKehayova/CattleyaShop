@@ -92,7 +92,7 @@ class User implements UserInterface
     /**
      * @return string
      */
-    public function getFirstName(): string
+    public function getFirstName()
     {
         return $this->firstName;
     }
@@ -108,7 +108,7 @@ class User implements UserInterface
     /**
      * @return string
      */
-    public function getSecondName(): string
+    public function getSecondName()
     {
         return $this->secondName;
     }

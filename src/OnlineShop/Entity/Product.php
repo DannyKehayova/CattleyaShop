@@ -2,6 +2,7 @@
 
 namespace OnlineShop\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -60,6 +61,39 @@ class Product
         $this->category = $category;
     }
 
+    /**
+     * The one-to-many association between Product and CartItem.
+     *
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="OnlineShop\Entity\CartItem", mappedBy="product")
+     */
+    private $items;
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getItems(): ArrayCollection
+    {
+        return $this->items;
+    }
+
+    /**
+     * @param ArrayCollection $items
+     */
+    public function setItems(ArrayCollection $items)
+    {
+        $this->items = $items;
+    }
+
+
+    /**
+     * Initializes cart items and order items.
+     */
+    public function __construct() {
+        $this->items = new ArrayCollection;
+
+    }
 
     /**
      * @var int
