@@ -64,4 +64,59 @@ class DefaultController extends Controller
     {
         return $this->render('default/faq.html.twig');
     }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/locationmap",name="location")
+     */
+    public function location()
+    {
+        return $this->render('default/location.html.twig');
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/terms",name="terms")
+     */
+    public function terms()
+    {
+        return $this->render('default/terms.html.twig');
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/refund",name="refund")
+     */
+    public function refund()
+    {
+        return $this->render('default/refund.html.twig');
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/privacy",name="privacy")
+     */
+    public function privacy()
+    {
+        return $this->render('default/privacy.html.twig');
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/carriers",name="carriers")
+     */
+    public function carriers()
+    {
+        return $this->render('default/carriers.html.twig');
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/info",name="info")
+     */
+    public function info()
+    {
+        return $this->render('default/info.html.twig');
+    }
+
 }
