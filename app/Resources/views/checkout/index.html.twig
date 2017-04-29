@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block body %}
+
+    <h1>Checkout</h1>
+
+        <div class="col-md-4">
+            {% include 'checkout/order_sumarry.html.twig' %}
+            <p>Cart Subtotal: ${{ cart_subtotal }}</p>
+            <a class="btn btn-sm btn-success" id="shipping_form_submit" href="{{ path('checkoutprocess') }}">
+                <i class="fa fa-usd" aria-hidden="true"></i> Checkout
+            </a>
+        </div>
+
+
+{% endblock %}

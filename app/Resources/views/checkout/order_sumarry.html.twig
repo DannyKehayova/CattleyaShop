@@ -1,0 +1,11 @@
+<legend>Order Summary</legend>
+
+<table class="table table-hover">
+    <tbody>
+    {% for item in items %}
+        <tr>
+            <td>{{ item.product.name}}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

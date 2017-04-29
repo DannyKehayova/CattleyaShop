@@ -187,13 +187,20 @@ class CartController extends Controller
      */
     public function deleteProductFromCart($id,Request $request)
     {
-        $item=$this->getDoctrine()->getRepository(CartItem::class)->find($id);
-        $em=$this->getDoctrine()->getManager();
-        if (!$item) {
-            throw $this->createNotFoundException('No product found for id '.$id);
+        $currentUser=$this->getUser();
+        if(!$currentUser){
+            $this->redirectToRoute('security_login');
         }
-        $em->remove($item);
-        $em->flush();
-        return $this->redirectToRoute("cart_view");
-    }
-}
+        else {
+            $item = $this->getDoctrine()->getRepository(CartItem::class)->find($id);
+            $em = $this->getDoctrine()->getManager();
+            if (!$item) {
+                throw $this->createNotFoundException('No product found for id ' . $id);
+            }
+            $em->remove($item);
+            $em->flush();
+        }
+            return $this->redirectToRoute("cart_view");
+
+
+}}

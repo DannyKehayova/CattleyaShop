@@ -72,6 +72,15 @@ class Product
     private $items;
 
     /**
+     *
+     *
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="OnlineShop\Entity\ProductsOrder", mappedBy="product")
+     */
+    private $orderProducts;
+
+    /**
      * @return ArrayCollection
      */
     public function getItems(): ArrayCollection
@@ -87,12 +96,29 @@ class Product
         $this->items = $items;
     }
 
+    /**
+     * @return ArrayCollection
+     */
+    public function getOrderProducts(): ArrayCollection
+    {
+        return $this->orderProducts;
+    }
+
+    /**
+     * @param ArrayCollection $orderProducts
+     */
+    public function setOrderProducts(ArrayCollection $orderProducts)
+    {
+        $this->orderProducts = $orderProducts;
+    }
+
 
     /**
      * Initializes cart items and order items.
      */
     public function __construct() {
         $this->items = new ArrayCollection;
+        $this->orderProducts = new ArrayCollection;
 
     }
 

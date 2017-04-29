@@ -34,9 +34,9 @@
         </div>
         <div class="col-md-4">
             <p>Order Total: ${{ total }}</p>
-            {#<a class="btn btn-sm btn-success" href="{{ path('web_shop_sales_checkout') }}">#}
-                {#<i class="fa fa-truck" aria-hidden="true"></i> Go to Checkout#}
-            {#</a>#}
+            <a class="btn btn-sm btn-success" href="{{ path('checkout') }}">
+                <i class="fa fa-truck" aria-hidden="true"></i> Go to Checkout
+            </a>
         </div>
     </div>
 {% endblock %}

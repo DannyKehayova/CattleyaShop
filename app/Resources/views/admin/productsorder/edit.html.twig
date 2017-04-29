@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Order status change{% endblock %}
+
+{% block body %}
+    <h1>Order status change</h1>
+    <div class="narrow">
+        {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+        <input class="btn btn-primary" type="submit" value="Change"/>
+        {{ form_end(edit_form) }}
+        <div class="row">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <a href="{{ path('productsorder_index') }}">Back to the list</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}
