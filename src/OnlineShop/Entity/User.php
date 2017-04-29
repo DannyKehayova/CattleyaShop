@@ -147,6 +147,32 @@ class User implements UserInterface
     /**
      * @return string
      */
+
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="cash", type="decimal", precision=10, scale=2,nullable=true)
+     */
+    private $cash;
+
+    /**
+     * @return float
+     */
+    public function getCash()
+    {
+        return $this->cash;
+    }
+
+    /**
+     * @param float $cash
+     */
+    public function setCash(float $cash)
+    {
+        $this->cash = $cash;
+    }
+
+
     public function getPhone()
     {
         return $this->phone;

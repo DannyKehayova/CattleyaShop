@@ -11,6 +11,7 @@ use OnlineShop\Entity\User;
 use DateTime;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -32,19 +33,41 @@ class CartController extends Controller
      * Displays "Shopping Cart" page.
      * @Route("/cartview",name="cart_view")
      * @return RedirectResponse|Response
+     *
      */
     public function indexAction()
     {
-        $user = $this->getUser();
-        $em = $this->getDoctrine()->getManager();
-        $cart = $em->getRepository('OnlineShop:Cart')->findOneBy(['user' => $user]);
-        $items = $cart->getItems();
-        $total = self::calculateTotalPrice($items);
-        return $this->render('cart/index.html.twig', [
-            'items' => $items,
-            'total' => $total,
-        ]);
-    }
+        if ($user = $this->getUser()) {
+            /**
+             * @var $user User
+             */
+            $user = $this->getUser();
+            $em = $this->getDoctrine()->getManager();
+            $cart = $em->getRepository('OnlineShop:Cart')->findOneBy(['user' => $user]);
+            $items = $cart->getItems();
+            $total = self::calculateTotalPrice($items);
+//        $userCash=$user->getCash();
+//        if($userCash<$total){
+//            throw new Exception("You don`t have enough money!");
+//        }
+//        else {
+//            $updatedUserCash = $userCash - $total;
+//            $userCash=$updatedUserCash;
+//        }
+
+            return $this->render('cart/index.html.twig', [
+                'items' => $items,
+                'total' => $total,
+            ]);
+        }
+
+        else {
+
+                return $this->redirectToRoute('security_login');
+            }
+        }
+
+
 
 
     /**
@@ -76,42 +99,13 @@ class CartController extends Controller
             $this->addFlash('success', sprintf('%s successfully added to cart', $product->getName()));
             return $this->redirectToRoute('cart_view');
         } else {
-            $this->addFlash('warning', 'Only logged in users can add to cart.');
+
             return $this->redirectToRoute('security_login');
         }
     }
 
 
-    /**
-     * Updates shopping cart.
-     *
-     * @param Request $request
-     * @Route("/updatecart", name="update_cart")
-     *
-     * @return RedirectResponse
-     */
-    public function updateAction(Request $request)
-    {
-        $items = $request->get('item');
-        $em = $this->getDoctrine()->getManager();
 
-        foreach ($items as $id => $quantity) {
-            $cartItem = $em->getRepository('OnlineShop:CartItem')->find($id);
-
-            if (intval($quantity) > 0) {
-                $cartItem->setQuantity($quantity);
-
-
-                $em->persist($cartItem);
-
-            } else {
-                $em->remove($cartItem);
-            }
-        }
-        $em->flush();
-        $this->addFlash('success', 'Cart updated.');
-        return $this->redirectToRoute('cart_view');
-    }
 
     /**
      * Creates the cart for current user.
@@ -163,6 +157,7 @@ class CartController extends Controller
         }
         $em->persist($cartItem);
         $product->setQuantity($product->getQuantity()-1);
+
     }
 
 
@@ -183,5 +178,22 @@ class CartController extends Controller
     }
 
 
-
+    /**
+     * @Route("/delete/{id}", name="user_items_delete")
+     * @param $id
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     */
+    public function deleteProductFromCart($id,Request $request)
+    {
+        $item=$this->getDoctrine()->getRepository(CartItem::class)->find($id);
+        $em=$this->getDoctrine()->getManager();
+        if (!$item) {
+            throw $this->createNotFoundException('No product found for id '.$id);
+        }
+        $em->remove($item);
+        $em->flush();
+        return $this->redirectToRoute("cart_view");
+    }
 }

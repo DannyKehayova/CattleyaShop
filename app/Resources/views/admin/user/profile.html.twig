@@ -25,6 +25,9 @@
         <p> Adress:</p>
         {{ user.address }}
         <p></p>
+        <p> Cash:</p>
+        {{ user.cash }} лв
+        <p></p>
         <br>Roles:
         {% for role in user.roles %}
             {{ role }}<span>   </span>
