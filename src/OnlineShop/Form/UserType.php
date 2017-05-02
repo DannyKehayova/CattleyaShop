@@ -45,7 +45,7 @@ class UserType extends AbstractType
             ->add('phone')
             ->add('address',TextType::class)
             ->add('city',TextType::class)
-            ->add('cash',NumberType::class)
+
             ->add('submit',SubmitType::class);
 
     }

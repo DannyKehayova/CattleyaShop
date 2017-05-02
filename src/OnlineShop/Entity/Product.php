@@ -16,6 +16,41 @@ use DateTime;
 class Product
 {
 
+
+
+    /**
+     * @ORM\ManyToMany(targetEntity="OnlineShop\Entity\Promotions", inversedBy="products")
+     * @ORM\JoinTable(name="product_promotions")
+     *
+     * @var ArrayCollection
+     */
+    private $promotions;
+
+    /**
+     * @return mixed
+     */
+    public function getPromotions()
+    {
+        return $this->promotions;
+    }
+
+    /**
+     * @param mixed $promotions
+     */
+    public function setPromotions($promotions)
+    {
+        $this->promotions = $promotions;
+    }
+
+    public function setPromotion(Promotions $promotion)
+    {
+        $this->promotions[] = $promotion;
+    }
+    public function unsetPromotion(Promotions $promotion)
+    {
+        $this->promotions->removeElement($promotion);
+    }
+
     /**
      * @var int
      * @ORM\Column(name="category_id", type="integer")
@@ -119,9 +154,13 @@ class Product
     public function __construct() {
         $this->items = new ArrayCollection;
         $this->orderProducts = new ArrayCollection;
+        $this->promotions = new ArrayCollection();
 
     }
-
+    /**
+     * @Assert\DateTime()
+     */
+    protected $createdAt;
     /**
      * @return DateTime
      */
@@ -130,9 +169,7 @@ class Product
         return $this->createdAt;
     }
 
-    /**
-     * @param DateTime $createdAt
-     */
+
     public function setCreatedAt(DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
@@ -175,12 +212,7 @@ class Product
      */
     private $description;
 
-    /**
-     * @var DateTime
-     *
-     * @ORM\Column(name="created_at", type="datetime")
-     */
-    private $createdAt;
+
     /**
      * @var string
      *
@@ -265,8 +297,40 @@ class Product
      */
     public function getPrice()
     {
+
         return $this->price;
     }
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="promotionPrice", type="decimal", precision=11, scale=2)
+     */
+    private $promotionPrice;
+
+    /**
+     * @return string
+     */
+    public function getPromotionPrice(): string
+    {
+        if ($this->hasActivePromotion()) {
+            $discount = $this->getPrice() * $this->getActualPromotion()->getDiscount() / 100;
+
+            return $this->getPrice() - $discount;
+        }
+        return $this->promotionPrice;
+    }
+
+    /**
+     * @param string $promotionPrice
+     */
+    public function setPromotionPrice(string $promotionPrice)
+    {
+
+        $this->promotionPrice = $promotionPrice;
+    }
+
 
     /**
      * Set quantity
@@ -338,6 +402,50 @@ class Product
     public function getPhoto()
     {
         return $this->photo;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasActivePromotion()
+    {
+        return $this->getActualPromotion() !== null;
+    }
+
+    /**
+     * @return Promotions|null
+     */
+    public function getActualPromotion()
+    {
+        $activePromotions = $this->promotions->filter(
+            function (Promotions $p) {
+                return $p->getEndDate() > new \DateTime("now") &&
+                $p->getStartDate() <= new \DateTime("now");
+            });
+        if ($activePromotions->count() == 0) {
+            return null;
+        }
+        if ($activePromotions->count() == 1) {
+            return $activePromotions->first();
+        }
+        $arr = $activePromotions->getValues();
+        usort($arr, function (Promotions $p1, Promotions $p2) {
+            return $p2->getDiscount() - $p1->getDiscount();
+        });
+        return $arr[0];
+    }
+
+    /**
+     * @return float
+     */
+    public function getOriginalPrice()
+    {
+        return $this->price;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }
 

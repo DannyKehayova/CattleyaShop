@@ -18,7 +18,13 @@
             <tr>
 
                 <td>{{ product.name }}</td>
-                <td>{{ product.price}}</td>
+                {% if product.price != product.promotionPrice %}
+                    <td>{{ product.promotionPrice}}</td>
+                    <td><del>{{ product.price }}</del></td>
+
+                {% else %}
+                    <td>product.price</td>
+                {% endif %}
                 <td>{{ product.quantity }}</td>
                 <td>{{ product.description }}</td>
                 <td><img src="/images/products/{{ product.photo }}" style="width: 250px;" ></td>>

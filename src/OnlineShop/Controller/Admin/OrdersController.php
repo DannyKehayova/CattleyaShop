@@ -1,6 +1,7 @@
 <?php
 namespace OnlineShop\Controller\Admin;
 use OnlineShop\Entity\ProductsOrder;
+use OnlineShop\Entity\User;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,7 +13,7 @@ use OnlineShop\Entity\Orders;
 /**
  *
  *
- * @Route("/order")
+ * @Route("/admin/orders")
  */
 class OrdersController extends Controller
 {
@@ -100,4 +101,32 @@ class OrdersController extends Controller
         $this->addFlash('warning', 'Order can not be updated.');
         return $this->redirectToRoute('user_profile');
     }
+
+    /**
+     * @return RedirectResponse|Response
+     * @Route("/myorder",name="myorder")
+     */
+    public function singleAction()
+    {
+        if ($user = $this->getUser()) {
+            /**
+             * @var $user User
+             */
+            $user = $this->getUser();
+            $em = $this->getDoctrine()->getManager();
+            $order = $em->getRepository('OnlineShop:Orders')->findOneBy(['user' => $user]);
+             $order->getStatus();
+
+
+            return $this->render('default/orderindex.html.twig', [
+                'order' => $order,
+            ]);
+        }
+
+        else {
+
+            return $this->redirectToRoute('security_login');
+        }
+    }
+
 }

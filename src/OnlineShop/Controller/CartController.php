@@ -37,7 +37,14 @@ class CartController extends Controller
      */
     public function indexAction()
     {
-        if ($user = $this->getUser()) {
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $cart = $em->getRepository('OnlineShop:Cart')->findOneBy(['user' => $user]);
+        if(!$cart)
+        {
+            throw new Exception("You dont have products in the cart yet! Go shop some :)");
+        }
+        else if ($user = $this->getUser()) {
             /**
              * @var $user User
              */
@@ -46,14 +53,6 @@ class CartController extends Controller
             $cart = $em->getRepository('OnlineShop:Cart')->findOneBy(['user' => $user]);
             $items = $cart->getItems();
             $total = self::calculateTotalPrice($items);
-//        $userCash=$user->getCash();
-//        if($userCash<$total){
-//            throw new Exception("You don`t have enough money!");
-//        }
-//        else {
-//            $updatedUserCash = $userCash - $total;
-//            $userCash=$updatedUserCash;
-//        }
 
             return $this->render('cart/index.html.twig', [
                 'items' => $items,

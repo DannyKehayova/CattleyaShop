@@ -7,3 +7,7 @@ services:
     #service_name:
     #    class: OnlineShop\Directory\ClassName
     #    arguments: ['@another_service_name', 'plain_value', '%parameter_name%']
+
+ online_shop.service.promotions_service:
+        class: OnlineShop\Service\PromotionsService
+        autowire: true

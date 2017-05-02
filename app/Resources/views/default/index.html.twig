@@ -2,32 +2,84 @@
 
 
 {% block main %}
-    {#<div class="container body-content">#}
-        {#<div class="row">#}
-            {#{% for category in categories %}#}
-                {#<div class="col-md-6">#}
-                    {#<article>#}
-                        {#<header>#}
-                            {#<h5>{{ category.name }}</h5>#}
-                        {#</header>#}
+    <table>
+        <thead>
+        <tr>
 
-                        {#<p>#}
-                            {#{{ category.products.count }}#}
-                        {#</p>#}
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Description</th>
+            <th>Photo</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for product in blog_products %}
+            <tr>
+
+                <td>{{ product.name }}</td>
+                {% if product.price != product.promotionPrice %}
+                    <td>{{ product.promotionPrice}}</td>
+                    <td><del>{{ product.price }}</del></td>
+
+                {% else %}
+                    <td>product.price</td>
+                {% endif %}
 
 
+                <td>{{ product.quantity }}</td>
 
-                        {#<footer>#}
-                            {#<div class="pull-right">#}
-                                {#<a class="btn btn-default btn-xs"#}
-                                   {#href="{{ path('category_products', {'id': category.id}) }}">Read more &raquo;</a>#}
-                            {#</div>#}
-                        {#</footer>#}
-                    {#</article>#}
-                {#</div>#}
-            {#{% endfor %}#}
-        {#</div>#}
-    {#</div>#}
+                <td>{{ product.description }}</td>
+
+                <td><img src="/images/products/{{ product.photo }}" style="width: 250px;" ></td>>
+                <td>
+                    <ul>
+
+
+                        {% if product.quantity > 0 %}
+                            <li>
+
+                                <a class="btn btn-sm" href="{{ path('products_show', { 'id': product.id }) }}">
+                                    <button type="button" class="btn btn-fefault cart">
+                                        Show
+                                    </button>
+                                </a>
+
+                            </li>
+                            <a class="btn btn-sm" href="{{ path ('add_to_cart',{ 'id': product.id }) }}">
+                                <button type="button" class="btn btn-fefault cart">
+                                    <i class="fa fa-shopping-cart"></i>
+                                    Add to cart
+                                </button>
+                            </a>
+                        {% else %}
+                            <h4>Няма наличност</h4>
+                        {% endif %}
+                        {% if app.user %}
+                            {% if app.getUser.isAdmin() or app.getUser.isEditor()%}
+
+                                <li>
+                                    <a class="btn btn-sm" href="{{ path('products_edit', { 'id': product.id }) }}">
+                                        <button type="button" class="btn btn-fefault cart">
+                                            Edit
+                                        </button>
+                                    </a>
+
+                                </li>
+                            {% endif %}
+                        {% endif %}
+
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="navigation text-center">
+        {{ knp_pagination_render(blog_products) }}
+    </div>
 {% endblock %}
 
 

@@ -23,6 +23,10 @@ class ProductType extends AbstractType
             ['class'=>Category::class])
              ->add('name')
              ->add('price')
+            ->add('promotions', EntityType::class, [
+                "class" => 'OnlineShop\Entity\Promotions',
+                "multiple" => true,
+                "expanded" => true])
             ->add('quantity', IntegerType::class, [
                 'attr' => ['class' => 'form-control']
             ])

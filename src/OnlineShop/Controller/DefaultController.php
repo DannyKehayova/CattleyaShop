@@ -3,23 +3,45 @@
 namespace OnlineShop\Controller;
 
 use OnlineShop\Entity\Category;
+use OnlineShop\Entity\Product;
+use OnlineShop\Entity\User;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
-    /**
-     * @Route("/", name="default_index")
-     */
-    public function indexAction(Request $request)
-    {
 
-        $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
-        return $this->render('default/index.html.twig', ['categories' => $categories]);
+    /**
+     * @Route("/",name="default_index")
+     * @Method("GET")
+     *
+     */
+    public function indexPagination(Request $request)
+    {
+        $blogProducts = $this->getDoctrine()->getRepository('OnlineShop:Product')->findAll();
+
+        /**
+         * @var $paginator \Knp\Component\Pager\Paginator
+         *
+         */
+
+        $paginator = $this->get('knp_paginator');
+        $result = $paginator->paginate(
+            $blogProducts,
+            $request->query->getInt('page', 1),
+            $request->query->getInt('limit', 5)
+        );
+
+        return $this->render('default/index.html.twig', ['blog_products' => $result,
+        ]);
 
     }
+
 
     /**
      * @Route("/category/{id}",name="category_products")
@@ -117,6 +139,38 @@ class DefaultController extends Controller
     public function info()
     {
         return $this->render('default/info.html.twig');
+    }
+
+    /**
+     * @return Response
+     * @Route("/myorder",name="myorder")
+     */
+    public function singleAction()
+    {
+        if ($user = $this->getUser()) {
+            /**
+             * @var $user User
+             */
+            $user = $this->getUser();
+            $em = $this->getDoctrine()->getManager();
+            $order = $em->getRepository('OnlineShop:Orders')->findOneBy(['user' => $user]);
+            if(!$order)
+            {
+                throw new Exception("You dont have any orders yet!");
+            }
+
+            $order->getStatus();
+
+
+            return $this->render('default/orderindex.html.twig', [
+                'order' => $order,
+            ]);
+        }
+
+        else {
+
+            return $this->redirectToRoute('security_login');
+        }
     }
 
 }

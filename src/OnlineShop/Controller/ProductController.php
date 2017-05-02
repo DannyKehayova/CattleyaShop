@@ -12,6 +12,7 @@ use Symfony\Component\Asset\Tests\UrlPackageTest;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -66,6 +67,7 @@ class ProductController extends Controller
                 );
 
                 $product->setPhoto($filename);
+
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($product);
                 $em->flush();

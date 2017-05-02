@@ -29,6 +29,10 @@ class CheckoutController extends Controller
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         $cart = $em->getRepository('OnlineShop:Cart')->findOneBy(['user' => $user]);
+        if(!$cart)
+        {
+            throw new Exception("You dont have products for checkout!");
+        }
         $items = $cart->getItems();
         $total = CartController::calculateTotalPrice($items);
         return $this->render('checkout/index.html.twig', [

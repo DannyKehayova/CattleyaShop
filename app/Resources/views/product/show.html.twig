@@ -12,10 +12,14 @@
                         <th>Name</th>
                         <td>{{ product.name }}</td>
                     </tr>
-                    <tr>
-                        <th>Price</th>
-                        <td>{{ product.price }}</td>
-                    </tr>
+                    <th>Price</th>
+                    {% if product.price != product.promotionPrice %}
+                        <td>{{ product.promotionPrice}}</td>
+                        <td><del>{{ product.price }}</del></td>
+
+                    {% else %}
+                        <td>product.price</td>
+                    {% endif %}
                     <tr>
                         <th>Quantity</th>
                         <td>{{ product.quantity }}</td>

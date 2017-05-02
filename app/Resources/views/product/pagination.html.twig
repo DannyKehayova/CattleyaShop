@@ -9,6 +9,7 @@
 
                 <th>Name</th>
                 <th>Price</th>
+                <th>Old price</th>
                 <th>Quantity</th>
                 <th>Description</th>
                 <th>Photo</th>
@@ -20,9 +21,13 @@
                 <tr>
 
                     <td>{{ product.name }}</td>
+                    {% if product.price != product.promotionPrice %}
+                    <td>{{ product.promotionPrice}}</td>
+                    <td><del>{{ product.price }}</del></td>
 
-                    <td>{{ product.price}}</td>
-
+                     {% else %}
+                         <td>product.price</td>
+                    {% endif %}
                     <td>{{ product.quantity }}</td>
                    
                     <td>{{ product.description }}</td>
@@ -76,7 +81,6 @@
     {{ knp_pagination_render(blog_products) }}
 </div>
 {% endblock %}
-
 
 
 

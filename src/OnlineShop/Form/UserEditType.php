@@ -10,6 +10,7 @@ namespace OnlineShop\Form;
 
 
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -20,6 +21,7 @@ class UserEditType extends UserType
         parent::buildForm($builder,$options);
         $builder
 
+            ->add('cash',NumberType::class)
             ->add('roles', ChoiceType::class, array(
                 'choices' => [
                     'Admin' => "ROLE_ADMIN",
