@@ -21,12 +21,11 @@
                 <tr>
 
                     <td>{{ product.name }}</td>
-                    {% if product.price != product.promotionPrice %}
+                    {% if  product.promotionPrice > 0 %}
                     <td>{{ product.promotionPrice}}</td>
                     <td><del>{{ product.price }}</del></td>
-
-                     {% else %}
-                         <td>product.price</td>
+                   {% else %}
+                    <td>{{product.price}}</td>
                     {% endif %}
                     <td>{{ product.quantity }}</td>
                    

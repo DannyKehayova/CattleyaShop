@@ -146,8 +146,13 @@ class CartController extends Controller
             $cartItem->setCart($cart);
             $cartItem->setProduct($product);
             $cartItem->setQuantity(1);
-
-            $cartItem->setItemPrice($product->getPrice());
+            $promoPrice=$product->getPromotionPrice();
+            if($promoPrice>0){
+                $cartItem->setItemPrice($product->getPromotionPrice());
+            }
+            else {
+                $cartItem->setItemPrice($product->getPrice());
+            }
             $cartItem->setCreatedAt($now);
             $cartItem->setModifiedAt($now);
         } else {
