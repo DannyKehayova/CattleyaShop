@@ -80,6 +80,7 @@ class CartController extends Controller
     public function addAction($id)
     {
         if ($user = $this->getUser()) {
+
             /**
              * @var $product Product
              * @var $user User
@@ -88,6 +89,7 @@ class CartController extends Controller
             $now = new DateTime;
             $em = $this->getDoctrine()->getManager();
             $product = $em->getRepository('OnlineShop:Product')->find($id);
+            if($product->getQuantity()>0){
             $cart = $em->getRepository('OnlineShop:Cart')->findOneBy(['user' => $user]);
             $cart = $this->persistCart($user, $now, $em, $cart);
             $em->flush();
@@ -95,7 +97,11 @@ class CartController extends Controller
             $this->persistCartItem($now, $cart, $product, $em, $cartItem);
 
             $em->flush();
-            $this->addFlash('success', sprintf('%s successfully added to cart', $product->getName()));
+            $this->addFlash('success', sprintf('%s successfully added to cart', $product->getName()));}
+            else
+            {
+                throw new Exception("This product is out of stock!");
+            }
             return $this->redirectToRoute('cart_view');
         } else {
 
